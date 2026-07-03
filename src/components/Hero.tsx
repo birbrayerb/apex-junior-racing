@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { site } from "@/lib/site";
 import { getTeamStats } from "@/lib/stats";
@@ -78,12 +79,12 @@ export function Hero() {
               {site.heroSub}
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="#riders" className="btn-primary">
+              <Link href="/riders" className="btn-primary">
                 Meet the roster
-              </a>
-              <a href="#contact" className="btn-ghost">
+              </Link>
+              <Link href="/contact" className="btn-ghost">
                 Partner with us
-              </a>
+              </Link>
             </div>
           </div>
         </motion.div>

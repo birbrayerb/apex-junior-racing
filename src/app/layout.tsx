@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { site } from "@/lib/site";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 // Display: Space Grotesk (geometric, for big numbers + wordmark).
@@ -20,7 +22,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${site.teamName} — ${site.discipline}`,
+  metadataBase: new URL("https://apex-junior-racing.vercel.app"),
+  title: {
+    // Home uses the default; sub-pages set `title: "Team"` etc. and this
+    // template appends the team name for browser tabs + search results.
+    default: `${site.teamName} — ${site.discipline}`,
+    template: `%s — ${site.teamName}`,
+  },
   description: site.heroSub,
   openGraph: {
     title: site.teamName,
@@ -40,7 +48,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="font-body antialiased">{children}</body>
+      <body className="font-body antialiased">
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
